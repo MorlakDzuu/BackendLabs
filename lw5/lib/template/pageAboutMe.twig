@@ -1,0 +1,183 @@
+{% extends 'layout.twig' %}
+{% block title %}
+    <title>Page about me</title>
+{% endblock %}
+{% block links %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="web/css/style.css" />
+    <link rel="stylesheet" href="web/css/reset.css" />
+    <link rel="stylesheet" href="web/css/fm.revealator.jquery.css" />
+{% endblock %}
+{% block navigationBar %}
+    <div class="menu_line">
+        <button class="hamburger">&#9776;</button>
+        <button class="cross">
+            <div class="close_icon_line"></div>
+            <div class="close_icon_line"></div>
+        </button>
+        <span class="menu_title">{{ navbar[0] }}</span>
+    </div>
+    <div class="header">
+        <ul class="menu">
+            <li class="button"><a href="#aboutMeArea" class="text_of_icon"><i class="fas fa-user">&nbsp;</i>{{ navbar[1] }}</a></li>
+            <li class="button"><a href="#myHobbyArea" class="text_of_icon"><i class="fas fa-heart">&nbsp;</i>{{ navbar[2] }}</a></li>
+            <li class="button"><a href="#favFilms" class="text_of_icon"><i class="fas fa-video">&nbsp;</i>{{ navbar[3] }}</a></li>
+            <li class="button"><a href="#" id="newFilmForm" class="text_of_icon"><i class="fas fa-plus">&nbsp;</i>{{ navbar[4] }}</a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block mainContent %}
+    <div class="back">
+        <div class="main_content">
+            <div class="about_me" id="aboutMeArea">
+                <div class="list">
+                    <img src='web/images/me.jpg' alt="Me" class="me_photo revealator-slidedown revealator-once revealator-position-within" />
+                    <div class="photo_caption_small revealator-slidedown revealator-once revealator-within">
+                        <blockquote class="description">{{ blockquote.text }}</blockquote>
+                        <cite class="author">{{ blockquote.author }}</cite>
+                    </div>
+                    <div class="clone_clear"></div>
+                    <div class="l_list revealator-slideup revealator-position-within revealator-oncee">
+                        <div class="title_of_list">{{ titels[0] }}</div>
+                        <ul class="simple_list">
+                            {% for school in schools %}
+                                <li>{{ school }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="l_list revealator-slideup revealator-position-within revealator-once">
+                        <div class="subtitle_of_list">{{ titels[1] }}</div>
+                        <ol class="simple_list">
+                            {% for hobby in hobbies %}
+                                <li>{{ hobby }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+                <div class="text_about_me">
+                    <div class="photo_caption">
+                        <blockquote class="description">{{ blockquote.text }}</blockquote>
+                        <cite class="author">{{ blockquote.author }}</cite>
+                    </div>
+                    <h1 class="my_name revealator-slideup revealator-position-within revealator-once">{{ titels[2] }}</h1>
+                    <div class="clear"></div>
+                    <img src='web/images/line.png' class="line_photo revealator-slideup revealator-position-within revealator-once" alt="Me" />
+                    <p class="simple_text revealator-slideup revealator-position-within revealator-once" id="myHobbyArea">
+                        {{ biography }}
+                    </p>
+                    <div class="subtitle revealator-slideup revealator-position-within revealator-once">{{ titels[3] }}</div>
+                    <div class="clear"></div>
+                    <p class="simple_text revealator-slideup revealator-position-within revealator-once">
+                        {{  story }}
+                    </p>
+                    <div class="link revealator-slideup revealator-position-within revealator-once"><a href="#" id="writeMe" class="text_of_link">{{ buttons[0] }}</a>&rarr;</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="films_block">
+        <div class="film_content">
+            <div class="main_films">
+
+                <div class="subtitle_of_films" id="favFilms">{{ titels[4] }}</div>
+                <div class="clear"></div>
+                {% for movie in main_movies %}
+                    <div class="film revealator-slideleft revealator-position-within revealator-once">
+                        <img src='web/images/{{ movie.image }}' alt="Me" class="photo_of_film" />
+                        <div class="name_of_film">{{ movie.title }}</div>
+                        <div class="clear"></div>
+                        <p class="text_about_film">
+                            {{ movie.text }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="clear"></div>
+            <div class="extra_films" id="extraFilms">
+                {% for movie in extra_movies %}
+                    <div class="film">
+                        <img src='web/images/{{ movie.image }}' alt="Me" class="photo_of_film" />
+                        <div class="clear"></div>
+                        <div class="name_of_film">{{ movie.title }}</div>
+                        <p class="text_about_film">
+                            {{ movie.text }}
+                        </p>
+                    </div>
+                {% endfor %}
+                <div id="newFilms" class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="button_of_film_margin" id="moreFilmsButton">
+            <div class="button_film revealator-zoomout revealator-delay1 revealator-within">
+                <div class="text_of_button_film">{{ buttons[1] }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block modal %}
+    <div class="form" id="contact_form">
+        <div class="close_icon closeContactModal">
+            <div class="close_icon_line"></div>
+            <div class="close_icon_line"></div>
+        </div>
+        <form name="contact_form" method="post" action="" id="contactForm" onsubmit="return false" class="form_block">
+            <div class="form_title">{{ contact_form.title }}</div>
+            <div class="clear"></div>
+            <span class="form_subtitle">{{ contact_form.subtitle[0] }}</span><span class="form_star">*</span>
+            <input class="username input_form_subtitle validate_contact" name="contact_name" type="text" />
+            <span class="form_subtitle">{{ contact_form.subtitle[1] }}</span><span class="form_star">*</span>
+            <input class="useremail input_form_subtitle validate_contact" name="contact_email" type="text" />
+            <label class=”country”>
+                <span class="form_from_subtitle">{{ contact_form.subtitle[2] }}</span>
+                <select name=”music” class="input_form_subtitle country">
+                    {% for country in contact_form.countries %}
+                        <option value={{ country.tag }}>{{ country.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <div class="clear"></div>
+            <div class="form_subtitle">{{ contact_form.subtitle[3] }}</div>
+            <div class="clear"></div>
+            <div class="form_radio_block">
+                <label><input id="male" type="radio" name="test" checked value="1" /><span class="form_radio">Мужской</span></label>
+                <label><input id="female" type="radio" name="test" value="2" /><span class="form_radio">Женский</span></label>
+            </div>
+            <div class="clear"></div>
+            <span class="form_yourname_subtitle">{{ contact_form.subtitle[4] }}</span>
+            <textarea class="form_text input_form_subtitle" name=”contact_about_me”></textarea>
+            <input type="submit" value={{ contact_form.button }} name="send" class="text_of_button_film button_send form_button_margin" />
+        </form>
+    </div>
+    <div class="form" id="new_film_form">
+        <div class="close_icon closeNewFilmModal">
+            <div class="close_icon_line"></div>
+            <div class="close_icon_line"></div>
+        </div>
+        <form name="newfilm_form" method="post" action="" onsubmit="return false" class="form_block" id="filmForm">
+            <div class="form_title">{{ new_film_form.title }}</div>
+            <div class="clear"></div>
+            <span class="form_subtitle">{{ new_film_form.subtitle[0] }}</span><span class="form_star">*</span>
+            <input class="filmurl input_form_subtitle validate_newfilm" name="url" type="text" />
+            <span class="form_subtitle">{{ new_film_form.subtitle[1] }}</span><span class="form_star">*</span>
+            <input class="filmname input_form_subtitle validate_newfilm" name="name" id="newfilm_name" type="text" />
+            <div class="clear"></div>
+            <span class="form_yourname_subtitle">{{ new_film_form.subtitle[2] }}</span><span class="form_star">*</span>
+            <textarea name="description" class="newfilm_form_text input_form_subtitle validate_newfilm"></textarea>
+            <input type="submit" value={{ new_film_form.button }} name="send" class="text_of_button_film button_send form_button_margin" />
+        </form>
+    </div>
+    <div id="close" class="form_close closeContactModal closeNewFilmModal"></div>
+{% endblock %}
+{% block footer %}
+    <div class="footer">
+        <div class="text_of_footer">{{ footer }}</div>
+    </div>
+{% endblock %}
+{% block javaScript %}
+    <script src="web/js/jquery-3.3.1.js"></script>
+    <script src="web/js/jquery-1.11.3.min.js"></script>
+    <script src="web/js/fm.revealator.jquery.js"></script>
+    <script src="web/js/goodCode.js"></script>
+{% endblock %}
